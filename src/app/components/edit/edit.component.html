@@ -1,13 +1,7 @@
-<p>edit works!</p>
+<!-- <p>edit works!</p> -->
 <div *ngIf="phone" class="w-full">
   <h1>Edit Phone</h1>
-  <form class="text-center py-10" (ngSubmit)="submit()">        
-    <h1 class="text-5xl font-bold my-4">{{ phone?.brand }} {{ formData.model }}</h1>
-    <h2 class="text-3xl"><span class="font-bold">Year:</span> <input type="number" [(ngModel)]="formData.releaseYear" class="form-control"></h2>
-    <h2 class="text-2xl"><span class="font-bold">ID:</span> {{ formData.id }}</h2>
-    <h3 class="text-xl"><span class="font-bold">Description:</span> <input type="text" [(ngModel)]="formData.operatingSystem" class="form-control"></h3>
-    <button type="submit" class="btn btn-primary">Save</button>
-  </form>
+  <h1>{{ phone.brand }} {{ phone.model }} {{ phone.id }} {{ phone.operatingSystem }} {{ phone.releaseYear }}</h1>
 </div>
 
 

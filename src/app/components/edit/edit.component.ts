@@ -9,7 +9,7 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-edit',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, NgIf],
   templateUrl: './edit.component.html',
   styleUrl: './edit.component.css'
 })
@@ -28,7 +28,7 @@ import { FormsModule } from '@angular/forms';
 
   export class EditComponent implements OnInit {
     public phone: Phone | null = null;
-    public formData: any = {};
+    // public formData: any = {};
   
     
     private phoneService = inject(PhoneDataService);
@@ -54,7 +54,7 @@ import { FormsModule } from '@angular/forms';
         ).subscribe(phone => {
           this.phone = phone;
           // Assigning phone data to formData object for two-way data binding
-          this.formData = { ...phone };
+          // this.formData = { ...phone };
         });
       }
     }
@@ -62,7 +62,7 @@ import { FormsModule } from '@angular/forms';
     public submit(){
       console.log("done");
       // Handle form submission logic here
-      console.log('Form data:', this.formData);
+      // console.log('Form data:', this);
       // You can send this data to your service for further processing
     }
   }
