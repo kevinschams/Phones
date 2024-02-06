@@ -10,6 +10,7 @@ export const routes: Routes = [
     { path: '', component: HomeComponent},
     // { path: 'phone/id', component: PhoneDetailsComponent},
     { path: 'phone/all', component: PhoneListComponent},
+    { path: 'phone/edit', component: EditComponent},
     { path: 'phone/:phoneId', component: PhoneComponent},
     
     
