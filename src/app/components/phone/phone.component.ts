@@ -44,7 +44,7 @@ export class PhoneComponent implements OnInit {
     public select(phone: Phone){
     
       this.phoneService.select(phone);
-      this.router.navigate(['/phone/edit/']);
+      this.router.navigate(['/phone/edit/' + phone.id]);
     }
   }
 

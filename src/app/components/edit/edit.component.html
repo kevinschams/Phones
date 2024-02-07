@@ -1,7 +1,32 @@
-<!-- <p>edit works!</p> -->
-<div *ngIf="phone" class="w-full">
+<div *ngIf="phone" class="container">
   <h1>Edit Phone</h1>
-  <h1>{{ phone.brand }} {{ phone.model }} {{ phone.id }} {{ phone.operatingSystem }} {{ phone.releaseYear }}</h1>
-</div>
+  <form (ngSubmit)="save()" #phoneForm="ngForm">
+    <div class="mb-3">
+      <label for="brand" class="form-label font-bold">BRAND:</label>
+      <input type="text" id="brand" name="brand" [(ngModel)]="phone.brand" class="form-control" required>
+    </div>
+    <div class="mb-3">
+      <label for="model" class="form-label font-bold">MODEL:</label>
+      <input type="text" id="model" name="model" [(ngModel)]="phone.model" class="form-control" required>
+    </div>
+    <div class="mb-3">
+      <label for="id" class="form-label font-bold">ID:</label>
+      <input type="text" id="id" name="id" [(ngModel)]="phone.id" class="form-control" required>
+    </div>
+    <div class="mb-3">
+      <label for="operatingSystem" class="form-label font-bold">OPERATING SYSTEM:</label>
+      <input type="text" id="operatingSystem" name="operatingSystem" [(ngModel)]="phone.operatingSystem" class="form-control" required>
+    </div>
+    <div class="mb-3">
+      <label for="releaseYear" class="form-label font-bold">RELEASE YEAR:</label>
+      <input type="number" id="releaseYear" name="releaseYear" [(ngModel)]="phone.releaseYear" class="form-control" required>
+    </div>
+    <div class="alert alert-success mt-3" role="alert" *ngIf="saveSuccess">
+      Save Successful!
+    </div>
+    <button type="submit" class="btn btn-primary" >Save</button>
 
+    <button type="cancel" class="btn btn-warning" (click)="cancel()">Cancel</button>
+  </form>
+</div>
 

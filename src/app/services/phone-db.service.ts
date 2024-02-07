@@ -64,7 +64,7 @@ export class PhoneDbService {
 
       wasSuccessful = true;
     }
-
+    console.log(wasSuccessful);
     return wasSuccessful;
   }
 

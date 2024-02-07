@@ -1,8 +1,9 @@
 import { Component, Inject, OnInit, inject } from '@angular/core';
 import { PhoneDataService } from '../../services/phone-data.service';
+import { PhoneDbService } from '../../services/phone-db.service';
 import { Phone } from '../../models/phone';
 import { NgIf } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 
@@ -13,26 +14,21 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './edit.component.html',
   styleUrl: './edit.component.css'
 })
-// export class EditComponent implements OnInit {
-  
-//   private phoneService = inject(PhoneDataService);
-//   private route = inject(ActivatedRoute);
-
-//   public phone: Phone | null = null;
-
-//   formData: any = {};
-
-//   ngOnInit(): void {    
-//     this.getPhone();
-//   }
 
   export class EditComponent implements OnInit {
     public phone: Phone | null = null;
+    public saveSuccess: boolean = false;
     // public formData: any = {};
   
     
-    private phoneService = inject(PhoneDataService);
-    private route = inject(ActivatedRoute)
+    // private phoneService = inject(PhoneDataService)
+    // private phoneDbService = inject(PhoneDbService)
+    // private route = inject(ActivatedRoute)
+    constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private phoneService: PhoneDataService,
+    private phoneDbService: PhoneDbService) { }
     
     
   
@@ -40,54 +36,37 @@ import { FormsModule } from '@angular/forms';
       this.getPhone();
     }
   
-    public getPhone(): void {
+    public getPhone(){
       this.phone = this.phoneService.getCurPhone();
   
       if(!this.phone) {
         this.route.paramMap.pipe(
           switchMap(params => {
-            let phoneId = params.get('vehicleId');
+            let phoneId = params.get('phoneId');
             phoneId = (phoneId ? phoneId : '-1');
   
-            return this.phoneService.getPhone(phoneId);
+            return this.phoneDbService.getPhone(phoneId);
           })
         ).subscribe(phone => {
           this.phone = phone;
-          // Assigning phone data to formData object for two-way data binding
-          // this.formData = { ...phone };
         });
       }
     }
   
-    public submit(){
-      console.log("done");
-      // Handle form submission logic here
-      // console.log('Form data:', this);
-      // You can send this data to your service for further processing
+    public save(){
+      this.saveSuccess = true;
+      setTimeout(() => { this.saveSuccess = false; }, 6000);
+      // console.log("done");
+      this.phoneDbService.updatePhone(this.phone);
+      
+    }  
+
+
+    cancel() {
+      this.router.navigate(['/phone/edit/']);
     }
   }
 
-//   public getPhone(): void {
-//     this.phone = this.phoneService.getCurPhone();
-
-//     if(!this.phone) {
-//       this.route.paramMap.pipe(
-//         switchMap(params => {
-//           let phoneId = params.get('vehicleId');
-//           phoneId = (phoneId ? phoneId : '-1');
-
-//           return this.phoneService.getPhone(phoneId);
-//         })
-//       ).subscribe(phone => {
-//         this.phone = phone;
-//       });
-//     }
-//   }
-
-//   public submit(){
-//     console.log("done");
-//   }
-// }
 
 
 
