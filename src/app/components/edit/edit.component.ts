@@ -54,7 +54,7 @@ import { FormsModule } from '@angular/forms';
     public save(){
       this.saveSuccess = true;
       setTimeout(() => { this.saveSuccess = false; }, 6000);
-      // console.log("done");
+      // console.log(this.phone);
       this.phoneDbService.updatePhone(this.phone);
       
     }  

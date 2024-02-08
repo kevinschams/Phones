@@ -25,5 +25,4 @@ export class PhoneDetailsComponent {
     // navigate to vehicle page
     this.router.navigate(['/phone/' + phone.id]);
   }
-
 }
